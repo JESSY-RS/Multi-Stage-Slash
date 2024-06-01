@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多段斬りアプリ</title> <!-- ページのタイトルを変更 -->
+    <style>
+        body {
+            background-color: black; /* 背景色を黒に設定 */
+            color: white; /* 文字色を白に設定 */
+        }
+
+        #video-container {
+            display: none;
+            width: 300px; /* ビデオの幅に合わせて調整 */
+            height: auto;
+            margin-top: 20px; /* ボタンとの間隔を20pxに設定 */
+        }
+
+        button {
+            color: white; /* ボタンの文字色を白に設定 */
+            background-color: #333; /* ボタンの背景色を暗いグレーに設定 */
+            border: none; /* ボーダーをなくす */
+            padding: 10px 20px; /* パディングを設定 */
+            cursor: pointer; /* カーソルをポインターに設定 */
+            border-radius: 5px; /* ボタンの角を丸める */
+            font-size: 16px; /* フォントサイズを16pxに設定 */
+        }
+
+        button:hover {
+            background-color: #555; /* マウスオーバー時の背景色を少し明るいグレーに設定 */
+        }
+    </style>
+</head>
+<body>
+    <button id="play-video-btn">多段斬り＋！</button>
+    <span id="random-number"></span>
+    <div id="video-container">
+        <video id="video" width="300" height="auto" muted>
+            <source src="mechaleo.mp4" type="video/mp4">
+            <!-- 他のビデオ形式を追加可能 -->
+        </video>
+    </div>
+
+    <script>
+        var randomTimes = 0; // 初期化
+
+        document.getElementById('play-video-btn').addEventListener('click', function() {
+            var videoContainer = document.getElementById('video-container');
+            var video = document.getElementById('video');
+            var randomNumberSpan = document.getElementById('random-number');
+            
+            if (randomTimes === 0) { // ランダム回数が0の場合のみランダムに設定
+                randomTimes = Math.floor(Math.random() * 12) + 1; // 1から12のランダムな数
+                randomNumberSpan.textContent = "　斬った回数: " + randomTimes;
+            }
+
+            var currentPlay = 0;
+
+            videoContainer.style.display = 'block'; // ビデオコンテナを表示
+
+            function playVideo() {
+                if (currentPlay < randomTimes) {
+                    currentPlay++;
+                    randomNumberSpan.textContent = "　斬った回数: " + currentPlay; // 再生回数を更新
+                    video.currentTime = 0; // ビデオの再生位置をリセット
+                    video.play(); // ビデオを再生
+                } else {
+                    currentPlay = 0; // 再生回数をリセット
+                    videoContainer.style.display = 'none'; // ビデオコンテナを非表示
+                    randomTimes = 0; // ランダム回数をリセット
+                }
+            }
+
+            video.addEventListener('ended', playVideo);
+
+            playVideo(); // 最初の再生を開始
+        });
+    </script>
+</body>
+</html>
