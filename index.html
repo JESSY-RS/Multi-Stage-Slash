@@ -1,31 +1,41 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" href="android-chrome-256x256.png">
+
     <title>多段斬りアプリ</title>
+
     <style>
-        body {
+
+        body 
+        {
             background-color: black;
             color: white;
-            text-align: left; /* 左寄せ */
+            margin-left: 20px;
         }
 
-        #video-container {
+        #video-container 
+        {
             margin-top: 20px;
         }
 
-        #button-container {
-            display: inline-block; /* ボタンと回数を横並びに */
+        #button-container 
+        {
+            display: inline-block; /* ボタンと回数表示を横並びに */
             margin-top: 10px; /* ボタンと動画の間隔を調整 */
         }
 
-        button {
+        button 
+        {
             color: white;
-            background-color: #333;
+            background-color: #555;
             border: none;
             padding: 10px 20px;
             cursor: pointer;
@@ -33,48 +43,66 @@
             font-size: 16px;
         }
 
-        button:hover {
-            background-color: #555;
+        button:hover 
+        {
+            background-color: #777;
         }
 
-        #random-number {
-            display: inline-block; /* 回数をボタンの右側に配置 */
-            margin-left: 10px; /* ボタンと回数の間隔を調整 */
+        #random-number 
+        {
+            display: inline-block; /* 回数表示をボタンの右側に配置 */
+            margin-left: 10px; /* ボタンと回数表示の間隔を調整 */
         }
+
     </style>
+
 </head>
+
 <body>
+
     <div id="video-container">
-        <video id="video" width="300" height="auto" muted>
+
+        <video id="video" width="300" height="300" muted>
             <source src="mechaleo.mp4" type="video/mp4">
         </video>
+
     </div>
+
     <div id="button-container"> <!-- ボタンを包む要素 -->
+
         <button id="play-video-btn">多段斬り＋！</button>
         <span id="random-number"></span> <!-- 回数を表示するための要素 -->
+
     </div>
 
     <script>
+
         var randomTimes = 0;
 
-        document.getElementById('play-video-btn').addEventListener('click', function() {
+        document.getElementById('play-video-btn').addEventListener('click', function()
+        {
             var video = document.getElementById('video');
             var randomNumberSpan = document.getElementById('random-number');
             
-            if (randomTimes === 0) {
+            if (randomTimes === 0) 
+            {
                 randomTimes = Math.floor(Math.random() * 12) + 1;
                 randomNumberSpan.textContent = "　斬った回数: " + randomTimes;
             }
 
             var currentPlay = 0;
 
-            function playVideo() {
-                if (currentPlay < randomTimes) {
+            function playVideo() 
+            {
+                if (currentPlay < randomTimes) 
+                {
                     currentPlay++;
                     randomNumberSpan.textContent = "　斬った回数: " + currentPlay;
                     video.currentTime = 0;
                     video.play();
-                } else {
+                } 
+                else
+                {
                     currentPlay = 0;
                     video.pause(); // 再生が終了したら動画を一時停止する
                     randomTimes = 0;
@@ -82,9 +110,11 @@
             }
 
             video.addEventListener('ended', playVideo);
-
             playVideo();
         });
+
     </script>
+
 </body>
+
 </html>
