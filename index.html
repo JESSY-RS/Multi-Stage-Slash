@@ -1,39 +1,30 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" href="android-chrome-256x256.png">
-
     <title>多段斬りアプリ</title>
 
     <style>
-
-        body 
-        {
+        body {
             background-color: black;
             color: white;
-            margin-left: 20px;
+            margin: 20px;
         }
 
-        #video-container 
-        {
+        #video-container {
             margin-top: 20px;
         }
 
-        #button-container 
-        {
+        #button-container {
             display: inline-block; /* ボタンと回数表示を横並びに */
             margin-top: 10px; /* ボタンと動画の間隔を調整 */
         }
 
-        button 
-        {
+        button {
             color: white;
             background-color: #555;
             border: none;
@@ -43,40 +34,43 @@
             font-size: 16px;
         }
 
-        button:hover 
-        {
+        button:hover {
             background-color: #777;
         }
 
-        #random-number 
-        {
+        #random-number {
             display: inline-block; /* 回数表示をボタンの右側に配置 */
             margin-left: 10px; /* ボタンと回数表示の間隔を調整 */
         }
 
+        footer {
+            border-top: 1px solid #bbb;
+            padding-top: 10px;
+            font-size: 12pt;
+            margin-top: 20px;
+        }
+        
     </style>
 
 </head>
-
 <body>
-
     <div id="video-container">
-
         <video id="video" width="300" height="300" muted>
             <source src="mechaleo.mp4" type="video/mp4">
         </video>
-
     </div>
-
     <div id="button-container"> <!-- ボタンを包む要素 -->
-
         <button id="play-video-btn">多段斬り＋！</button>
         <span id="random-number"></span> <!-- 回数を表示するための要素 -->
-
     </div>
+    <br><br><br><br>
+    <footer>
+        ※<font color="red">WiFi通信推奨</font>です。</br>
+        ※多段斬りを１回再生した分の動画をランダム回数分、繰り返して表示するので、何回もやると通信量が増えると思うため。
+    </footer>
 
     <script>
-
+        
         var randomTimes = 0;
 
         document.getElementById('play-video-btn').addEventListener('click', function()
@@ -112,9 +106,7 @@
             video.addEventListener('ended', playVideo);
             playVideo();
         });
-
+        
     </script>
-
 </body>
-
 </html>
